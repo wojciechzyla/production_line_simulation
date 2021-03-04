@@ -1,0 +1,23 @@
+=== [ Turn: 3 ] ===
+
+== WORKERS ==
+
+WORKER #10
+  PBuffer: #3 (pt = 1)
+  Queue: (empty)
+  SBuffer: (empty)
+
+WORKER #11
+  PBuffer: (empty)
+  Queue: (empty)
+  SBuffer: (empty)
+
+
+== STOREHOUSES ==
+
+STOREHOUSE #1
+  Stock: #1
+
+STOREHOUSE #2
+  Stock: #2
+
