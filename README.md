@@ -14,7 +14,8 @@ Each ramp and each worker can only transfer semi-finished products to a certain 
  
  
  
-Additional notes:
+# Additional notes:
+
 * Each semi-finished product delivered to the factories has its own serial number, which does not change between production stages (this number is a positive integer).
 * Deliveries of semi-finished products to the ramp take place with a period (eg every second round of simulation), beginning from first round. Only one unit of semi-finished product is delivered at a time.
 * A worker processes at once (in a given turn) only one unit of semi-finished product, with each worker taking specified number of turns to process (it can differ between workers, but it is always at least one turn).
@@ -23,3 +24,22 @@ Additional notes:
 * At the moment, each ramp/worker transfers processed semi-finished product to one of the assigned recipients without favoring any of them (i.e. the recipient is selected from a pool of n receivers with the same probability - 1/n). Ultimately, however, each ramp/worker will have the possibility to have their own preferences (e.g. they will pass semi-finished products to worker A twice as often as worker B) - this requirement should be taken into account at the design stage, using an appropriate data structure to store information about the preferences of recipients' choice.
 * Each warehouse has the ability to store products independently of other warehouses (i.e. the internal implementation of the functionality of the "semi-finished products container" may differ between warehouses).
 
+
+# Simulation
+
+For a given network model (loaded from a file), we want to be able to simulate its operation - e.g. to check the potential efficiency of the production line.
+
+The unit of time in the simulation is round. Each turn has stages in the order below:
+
+1. Supply of semi-finished products for ramps
+2. Handing over semi-finished products to recipients.(The intermediate is immediately transferred from the sender to the recipient - it is never "on the way".)
+3. Processing of intermediates by workers.
+4. Reporting on the simulation status (if applicable for a given turn)
+
+Assume that at each stage of the simulation, the nodes are considered sequentially, according to the increasing ID (i.e., for example, work is done first by worker # 1, then worker # 2, etc.) - thanks to this, there is no need to use the multi-threading mechanism.
+The simulation time starts at 1 (i.e. the first round has an ID of 1).
+
+It shall be possible to generate a simulation status report in the following modes:
+
+* for given turns (e.g. for the third and fifth turns, for the last turn)
+* at set intervals (e.g. every other turn)
